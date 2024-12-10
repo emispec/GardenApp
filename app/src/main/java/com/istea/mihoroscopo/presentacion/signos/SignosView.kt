@@ -42,7 +42,6 @@ fun SignosView (
     state : SignosEstado,
     onAction: (SignosIntencion)->Unit
 ) {
-
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
         onAction(SignosIntencion.CargarLista)
     }
@@ -81,7 +80,7 @@ fun ListaDeSignosView(signos: List<Signo>, onSelect: (Signo)->Unit){
         items(items = signos) {signo ->
             Card(
                 modifier = Modifier
-                    .padding(horizontal = 20.dp)
+                    .padding(horizontal = 20.dp, vertical = 20.dp)
                     .fillMaxWidth(),
                 colors = CardDefaults.cardColors(
                     contentColor = MaterialTheme.colorScheme.secondary,
@@ -95,8 +94,8 @@ fun ListaDeSignosView(signos: List<Signo>, onSelect: (Signo)->Unit){
                     verticalAlignment = Alignment.CenterVertically
                 ){
                     Image(
-                        painterResource(R.drawable.s001),
-                        contentDescription = "",
+                        painterResource(signo.iconId),
+                        contentDescription = signo.nombre,
                         contentScale = ContentScale.Fit,
                         modifier = Modifier
                             .height(80.dp)
@@ -122,7 +121,7 @@ fun ListaDeSignosView(signos: List<Signo>, onSelect: (Signo)->Unit){
                         Text(
                             modifier = Modifier.padding(10.dp),
                             style = MaterialTheme.typography.bodyMedium,
-                            text = "Esta descripcion esta harcodeada"
+                            text = signo.descripcion
                         )
                     }
                 }
@@ -131,3 +130,4 @@ fun ListaDeSignosView(signos: List<Signo>, onSelect: (Signo)->Unit){
         }
     }
 }
+

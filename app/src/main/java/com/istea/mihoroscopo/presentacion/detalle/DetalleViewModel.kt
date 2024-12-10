@@ -21,7 +21,7 @@ class DetalleViewModel(
 
     fun ejecutar(intencion: DetalleIntencion) {
         when(intencion){
-            is DetalleIntencion.IrParaAtras -> cargarContenido()
+            is DetalleIntencion.IrParaAtras -> irParaAtras()
             is DetalleIntencion.CargarContenido -> cargarContenido()
         }
     }
@@ -40,20 +40,5 @@ class DetalleViewModel(
                 uiState = DetalleEstado.Error(mensaje = "Error al cargar el contenido")
             }
         }
-    }
-}
-
-
-class DetalleViewModelFactory(
-    private val repositorio: Repository,
-    private val router: Router,
-    private val signoid: String
-) : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(DetalleViewModel::class.java)) {
-            return DetalleViewModel(repositorio,router,signoid) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
